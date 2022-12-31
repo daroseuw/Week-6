@@ -143,17 +143,9 @@ class PlayerType:
             return player_list[1][1]
             
 
-class Moves:
-    """
-    This class gets and analyzes moves to ensure validity.
-    """
+class Human:
     def __init__(self):
-        self.move_row = None
-        self.move_col = None
-        self.diag_values_top_left = []
-        self.diag_values_top_right = []
-        self.winning_symbol = None
-        self.winner = False
+        pass
     
     def get_move(self):  
         """
@@ -190,6 +182,204 @@ class Moves:
             return
         else:
             self.play_move(board, current_player)
+
+class Bot:
+    def __init__(self):
+        self.opponent = None
+
+    def define_opponent(self, current_player):
+        if current_player == 'X':
+            self.opponent = 'O'
+        else:
+            self.opponent = 'X'
+    
+    def play_move(self, board, current_player):
+        self.define_opponent(current_player)
+
+        # REPLACE WITH LOOP LOGIC IF TIME ALLOWS
+        # diag win
+        if board[0][0] == board[2][2] == current_player and board[1][1] == ' ':
+            board[1][1] = current_player
+        elif board[0][0] == board[1][1] == current_player and board[2][2] == ' ':
+            board[2][2] = current_player
+        elif board[1][1] == board[2][2] == current_player and board[0][0] == ' ':
+            board[0][0] = current_player    
+        elif board[2][0] == board[0][2] == current_player and board[1][1] == ' ':
+            board[1][1] = current_player
+        elif board[2][0] == board[1][1] == current_player and board[0][2] == ' ':
+            board[0][2] = current_player
+        elif board[1][1] == board[0][2] == current_player and board[2][0] == ' ':
+            board[2][0] = current_player
+
+        # horizontal win
+            # first row
+        elif board[0][0] == board[0][1] == current_player and board[0][2] == ' ':
+            board[0][2] = current_player
+        elif board[0][0] == board[0][2] == current_player and board[0][1] == ' ':
+            board[0][1] = current_player
+        elif board[0][1] == board[0][2] == current_player and board[0][0] == ' ':
+            board[0][0] = current_player
+            # second row
+        elif board[1][0] == board[1][1] == current_player and board[1][2] == ' ':
+            board[1][2] = current_player
+        elif board[1][0] == board[1][2] == current_player and board[1][1] == ' ':
+            board[1][1] = current_player
+        elif board[1][1] == board[1][2] == current_player and board[1][0] == ' ':
+            board[1][0] = current_player
+            # third row
+        elif board[2][0] == board[2][1] == current_player and board[2][2] == ' ':
+            board[2][2] = current_player
+        elif board[2][0] == board[2][2] == current_player and board[2][1] == ' ':
+            board[2][1] = current_player
+        elif board[2][1] == board[2][2] == current_player and board[2][0] == ' ':
+            board[2][0] = current_player    
+        # vertical win
+            # first col
+        elif board[0][0] == board[1][0] == current_player and board[2][0] == ' ':
+            board[2][0] = current_player
+        elif board[0][0] == board[2][0] == current_player and board[1][0] == ' ':
+            board[1][0] = current_player
+        elif board[1][0] == board[2][0] == current_player and board[0][0] == ' ':
+            board[0][0] = current_player
+            # second col
+        elif board[0][1] == board[1][1] == current_player and board[2][1] == ' ':
+            board[2][1] = current_player
+        elif board[0][1] == board[2][1] == current_player and board[1][1] == ' ':
+            board[1][1] = current_player
+        elif board[1][1] == board[2][1] == current_player and board[0][1] == ' ':
+            board[0][1] = current_player
+            # third col
+        elif board[0][2] == board[1][2] == current_player and board[2][2] == ' ':
+            board[2][2] = current_player
+        elif board[0][2] == board[2][2] == current_player and board[1][2] == ' ':
+            board[1][2] = current_player
+        elif board[1][2] == board[2][2] == current_player and board[0][2] == ' ':
+            board[0][2] = current_player
+
+        # diag block
+        if board[0][0] == board[2][2] == self.opponent and board[1][1] == ' ':
+            board[1][1] = current_player
+        elif board[0][0] == board[1][1] == self.opponent and board[2][2] == ' ':
+            board[2][2] = current_player
+        elif board[1][1] == board[2][2] == self.opponent and board[0][0] == ' ':
+            board[0][0] = current_player    
+        elif board[2][0] == board[0][2] == self.opponent and board[1][1] == ' ':
+            board[1][1] = current_player
+        elif board[2][0] == board[1][1] == self.opponent and board[0][2] == ' ':
+            board[0][2] = current_player
+        elif board[1][1] == board[0][2] == self.opponent and board[2][0] == ' ':
+            board[2][0] = current_player
+        # horizontal block
+            # first row
+        elif board[0][0] == board[0][1] == self.opponent and board[0][2] == ' ':
+            board[0][2] = current_player
+        elif board[0][0] == board[0][2] == self.opponent and board[0][1] == ' ':
+            board[0][1] = current_player
+        elif board[0][1] == board[0][2] == self.opponent and board[0][0] == ' ':
+            board[0][0] = current_player
+            # second row
+        elif board[1][0] == board[1][1] == self.opponent and board[1][2] == ' ':
+            board[1][2] = current_player
+        elif board[1][0] == board[1][2] == self.opponent and board[1][1] == ' ':
+            board[1][1] = current_player
+        elif board[1][1] == board[1][2] == self.opponent and board[1][0] == ' ':
+            board[1][0] = current_player
+            # third row
+        elif board[2][0] == board[2][1] == self.opponent and board[2][2] == ' ':
+            board[2][2] = current_player
+        elif board[2][0] == board[2][2] == self.opponent and board[2][1] == ' ':
+            board[2][1] = current_player
+        elif board[2][1] == board[2][2] == self.opponent and board[2][0] == ' ':
+            board[2][0] = current_player    
+        # vertical block
+            # first col
+        elif board[0][0] == board[1][0] == self.opponent and board[2][0] == ' ':
+            board[2][0] = current_player
+        elif board[0][0] == board[2][0] == self.opponent and board[1][0] == ' ':
+            board[1][0] = current_player
+        elif board[1][0] == board[2][0] == self.opponent and board[0][0] == ' ':
+            board[0][0] = current_player
+            # second col
+        elif board[0][1] == board[1][1] == self.opponent and board[2][1] == ' ':
+            board[2][1] = current_player
+        elif board[0][1] == board[2][1] == self.opponent and board[1][1] == ' ':
+            board[1][1] = current_player
+        elif board[1][1] == board[2][1] == self.opponent and board[0][1] == ' ':
+            board[0][1] = current_player
+            # third col
+        elif board[0][2] == board[1][2] == self.opponent and board[2][2] == ' ':
+            board[2][2] = current_player
+        elif board[0][2] == board[2][2] == self.opponent and board[1][2] == ' ':
+            board[1][2] = current_player
+        elif board[1][2] == board[2][2] == self.opponent and board[0][2] == ' ':
+            board[0][2] = current_player
+        # Normal moves
+        elif board[0][0] == ' ':
+            board[0][0] = current_player
+        elif board[2][2] == ' ':
+            board[2][2] = current_player
+        elif board[2][0] == ' ':
+            board[2][0] = current_player
+        elif board[1][0] == ' ':
+            board[1][0] = current_player
+        elif board[2][1] == ' ':
+            board[2][1] = current_player
+        elif board[0][2] == ' ':
+            board[0][2] = current_player
+        elif board[1][1] == ' ':
+            board[1][1] = current_player
+        elif board[0][1] == ' ':
+            board[0][1] = current_player
+        elif board[1][2] == ' ':
+            board = current_player
+
+class Moves:
+    """
+    This class gets and analyzes moves to ensure validity.
+    """
+    def __init__(self):
+        self.move_row = None
+        self.move_col = None
+        self.diag_values_top_left = []
+        self.diag_values_top_right = []
+        self.winning_symbol = None
+        self.winner = False
+    
+    # def get_move(self):  
+    #     """
+    #     Requests move input from users and ensures entries are numeric. If move input is
+    #     not numeric, does not break the game and continues to request input.
+    #     """
+    #     while True:
+    #         try:
+    #             self.move_row = int(input("What row would you like to play in?"))
+    #             self.move_col = int(input("What column would you like to play in?"))
+    #         except ValueError:
+    #             self.move_input_error = str("Please enter an integer value for row and column.")
+    #             # print("Please enter an integer value for row and column.")
+    #             #Return to the start of the loop
+    #             continue
+    #         else:
+    #             #Exit the loop
+    #             break
+
+    # def check_valid_move(self, board): # Validates the move input from users
+    #     if (self.move_row >= 1 and self.move_row <= 3) and (self.move_col >= 1 and self.move_col <= 3):
+    #         if board[self.move_row-1][self.move_col-1] == ' ':
+    #             return True
+    #         self.error_message = "T"
+    #         return False
+    #     self.error_message = "B"
+    #     return False
+
+    # def play_move(self, board, current_player): # Combines input and validation
+    #     self.get_move()
+
+    #     if self.check_valid_move(board):
+    #         board[self.move_row - 1][self.move_col - 1] = current_player
+    #         return
+    #     else:
+    #         self.play_move(board, current_player)
 
     def advance_turn(self, current_player): # Advances the turn to the other player
         if current_player == 'X':

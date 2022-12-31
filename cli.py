@@ -2,7 +2,7 @@
 # # the Tic-Tac-Toe game. This is where input and output happens.
 # # For core game logic, see logic.py.
 
-from logic import Players, Board, Moves, PlayerType
+from logic import Players, Board, Moves, PlayerType, Human, Bot
 
 # Run the game from the CLI based on logic.py code:
 class RunGame:
@@ -26,6 +26,8 @@ class RunGame:
         self.gameboard = Board()
         self.board = self.gameboard.new_board()
         self.moves = Moves()
+        self.human = Human()
+        self.bot = Bot()
         self.gameboard.full = False
         first_player_vars = [self.first_player, self.first_player_type]
         second_player_vars = [self.second_player, self.second_player_type]
@@ -38,9 +40,14 @@ class RunGame:
             self.gameboard.print_board()
             # Return current player type:
             self.current_player_type = self.get_type.get_player_type(self.current_player, self.player_vars)
-            # print(self.current_player_type)
             print(f"It is {self.current_player}'s turn.")
-            self.moves.play_move(self.board, self.current_player)
+            if self.current_player_type == 'Human':
+                self.human.play_move(self.board, self.current_player)
+            elif self.current_player_type == 'Bot':
+                self.bot.play_move(self.board, self.current_player)
+            else:
+                print('There is an error with human v. bot play logic')
+            # self.moves.play_move(self.board, self.current_player)
             self.moves.winner = self.moves.check_for_win(self.board)
             if self.moves.winner == True:
                 break
