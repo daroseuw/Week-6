@@ -257,7 +257,7 @@ class Bot:
             board[0][2] = current_player
 
         # diag block
-        if board[0][0] == board[2][2] == self.opponent and board[1][1] == ' ':
+        elif board[0][0] == board[2][2] == self.opponent and board[1][1] == ' ':
             board[1][1] = current_player
         elif board[0][0] == board[1][1] == self.opponent and board[2][2] == ' ':
             board[2][2] = current_player
